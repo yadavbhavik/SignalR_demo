@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace SignalR_demo
+namespace SignalR.Hub
 {
     public class Startup
     {
@@ -27,7 +27,7 @@ namespace SignalR_demo
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World! SignalR");
+                await context.Response.WriteAsync("Hello World!");
             });
         }
     }
