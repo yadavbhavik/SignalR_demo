@@ -28,8 +28,7 @@ namespace SignalR.Hub
 
             app.UseSignalR(routes =>
             {
-                //routes.MapHub<NotificationsHub>("/notificationhub", options =>
-                //    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransports.All);
+                routes.MapHub<NotificationHub>("/notificationhub");
             });
 
             app.Run(async (context) =>
