@@ -23,7 +23,7 @@ namespace SignalR.WebClient
         {
             services.AddMvc();
 
-            // store configuration into AppSettings class -Sahil Maiyani 09-08-2019 05:10
+            // store configuration into AppSettings class -Sahil Maiyani 09-08-2019
             services.Configure<AppSettings>(Configuration.GetSection("ApplicationSettings"));
             services.AddOptions();
         }
