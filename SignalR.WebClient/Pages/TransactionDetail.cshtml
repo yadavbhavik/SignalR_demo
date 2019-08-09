@@ -27,7 +27,7 @@
                 return console.error(err.toString());
         });
 
-        //call when signalr hub send message through WelcomeMessage params -Sahil 09-08-2019
+        // call when signalr hub send message through WelcomeMessage params -Sahil 09-08-2019
         connection.on("WelcomeMessage", function (message) {
             messageComponant.innerHTML = message;
         });
