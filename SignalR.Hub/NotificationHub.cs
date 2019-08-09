@@ -8,6 +8,7 @@ namespace SignalR.Hub
 {
     public class NotificationHub : Microsoft.AspNetCore.SignalR.Hub
     {
+        //add configuration by bhavik yadav date:09/08/19
         public override async Task OnConnectedAsync()
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, Context.User.Identity.Name);
@@ -20,6 +21,11 @@ namespace SignalR.Hub
             await base.OnDisconnectedAsync(ex);
         }
 
+       //send message to user by bhavik yadav date:09/08/19
+        public async Task SendWelcomeMessage()
+        {
+            await Clients.All.SendAsync("WelcomeMessage","Welcome user...");
+        }
     }
 
 }
