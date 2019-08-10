@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EventBusRabbitMQ
 {
-    public interface IRabbitMQPersistentConnection
+    public interface IRabbitMQPersistentConnection : IDisposable
     {
         bool TryConnect();
 

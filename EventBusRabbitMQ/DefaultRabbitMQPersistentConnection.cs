@@ -1,6 +1,7 @@
 ﻿using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace EventBusRabbitMQ
@@ -9,6 +10,7 @@ namespace EventBusRabbitMQ
     {
         private IConnectionFactory _connectionFactory;
         IConnection _connection;
+        bool _disposed;
 
         public bool IsConnected
         {
@@ -44,6 +46,22 @@ namespace EventBusRabbitMQ
             }
 
             return _connection.CreateModel();
+        }
+
+        public void Dispose()
+        {
+            if (_disposed) return;
+
+            _disposed = true;
+
+            try
+            {
+                _connection.Dispose();
+            }
+            catch (IOException ex)
+            {
+                throw new IOException("RabbitMQ connection can not be disposed");
+            }
         }
     }
 }
