@@ -16,6 +16,8 @@ namespace SignalR.Hub
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSignalR();
+            
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -26,10 +28,18 @@ namespace SignalR.Hub
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .WithMethods("GET", "POST", "DELETE", "PUT")
+                    .AllowCredentials();
+            });
             app.UseSignalR(routes =>
             {
                 routes.MapHub<NotificationHub>("/notificationhub");
             });
+
 
             app.Run(async (context) =>
             {
