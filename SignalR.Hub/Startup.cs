@@ -15,8 +15,11 @@ namespace SignalR.Hub
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSignalR();
-            
+            services.AddSignalR(o=> {
+                o.EnableDetailedErrors = true;
+            });
+
+            //send message to user by bhavik yadav date:10/08/19
             services.AddCors();
         }
 
@@ -28,6 +31,7 @@ namespace SignalR.Hub
                 app.UseDeveloperExceptionPage();
             }
 
+            //send message to user by bhavik yadav date:10/08/19
             app.UseCors(builder =>
             {
                 builder.AllowAnyOrigin()
