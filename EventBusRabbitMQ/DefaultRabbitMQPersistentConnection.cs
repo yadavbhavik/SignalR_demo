@@ -6,7 +6,7 @@ using System.Text;
 
 namespace EventBusRabbitMQ
 {
-    class DefaultRabbitMQPersistentConnection : IRabbitMQPersistentConnection
+    public class DefaultRabbitMQPersistentConnection : IRabbitMQPersistentConnection
     {
         private IConnectionFactory _connectionFactory;
         IConnection _connection;
