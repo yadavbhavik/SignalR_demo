@@ -34,12 +34,13 @@ namespace SignalR.Hub
             //send message to user by bhavik yadav date:10/08/19
             services.AddCors();
 
-            //inject rabbitmq connection class -Sahil 12-08-2019
+            //inject rabbitmq class -Sahil 12-08-2019
             AddRabbitMQConfigs(services);
         }
 
         private void AddRabbitMQConfigs(IServiceCollection services)
         {
+            //configure rabbitmq conneection
             services.AddSingleton<IRabbitMQPersistentConnection>(sp =>
             {
                 var factory = new ConnectionFactory()
@@ -58,6 +59,15 @@ namespace SignalR.Hub
                 }
 
                 return new DefaultRabbitMQPersistentConnection(factory);
+            });
+
+            //Configure rabbitmq queue and channel  -Sahil 12-08-2019
+            services.AddSingleton<IRabbitMQOperation>(sp =>
+            {
+                var connection = sp.GetRequiredService<IRabbitMQPersistentConnection>();
+                var queueName = Configuration["GlobalQueue"];
+
+                return new RabbitMQOperation(connection, queueName);
             });
         }
 

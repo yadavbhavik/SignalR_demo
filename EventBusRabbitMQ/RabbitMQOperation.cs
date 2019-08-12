@@ -6,7 +6,7 @@ using System.Text;
 
 namespace EventBusRabbitMQ
 {
-    class RabbitMQOperation : IRabbitMQOperation
+    public class RabbitMQOperation : IRabbitMQOperation
     {
         private readonly IRabbitMQPersistentConnection persistentConnection;
         private readonly string queueName;
