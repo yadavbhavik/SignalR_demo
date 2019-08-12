@@ -26,7 +26,7 @@ namespace RabbitMQ.ConsoleApplication
                     channel.QueueBind(queue: "signalr-global",
                                       exchange: "client-update",
                                       routingKey: "notification");
-
+                    a:
                     Console.WriteLine(" [*] Waiting for logs.");
 
                     var consumer = new EventingBasicConsumer(channel);
@@ -39,7 +39,8 @@ namespace RabbitMQ.ConsoleApplication
                     channel.BasicConsume(queue: "signalr-global",
                                          autoAck: true,
                                          consumer: consumer);
-
+                    Console.ReadLine();
+                    goto a;
                 }
             }
 

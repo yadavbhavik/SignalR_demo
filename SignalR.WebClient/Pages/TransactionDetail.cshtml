@@ -7,6 +7,11 @@
 <h2>TransactionDetail</h2>
 <h3 id="message">Ready to connect...</h3>
 <button class="btn btn-default" id="welcomeButton">Get Welcome</button>
+<br /><br/>
+<h4>Price notification..</h4>
+<ul id="priceState">
+    <li>initialize..no notification</li>
+</ul>
 
 @using Microsoft.Extensions.Options
 @inject IOptions<AppSettings> settings
@@ -17,6 +22,7 @@
 
         var messageComponant = document.getElementById("message");
         var welcomeButton = document.getElementById("welcomeButton");
+        var priceListComponant = document.getElementById("priceState");
 
         // establish connection to signalrhub using url sepcified in appsettings -Sahil 09-08-2019
         var connection = new signalR.HubConnectionBuilder().withUrl("@settings.Value.SignalRHubUrl/notificationhub").build();
@@ -32,6 +38,16 @@
         // call when signalr hub send message through WelcomeMessage params -Sahil 09-08-2019
         connection.on("WelcomeMessage", function (message) {
             messageComponant.innerHTML = message;
+        });
+
+
+        // call when pricestate updated call -Sahil 09-08-2019
+        connection.on("UpdatedOrderState", function (message) {
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode(message);
+            node.appendChild(textnode);
+
+            priceListComponant.appendChild(node);
         });
 
         //WIP:Testing call when signalr connection disconnected -Sahil 10-08-2019
