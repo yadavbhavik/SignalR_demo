@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EventBusRabbitMQ;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -66,8 +67,9 @@ namespace SignalR.Hub
             {
                 var connection = sp.GetRequiredService<IRabbitMQPersistentConnection>();
                 var queueName = Configuration["GlobalQueue"];
+                var iMediator = sp.GetRequiredService<IMediator>();
 
-                return new RabbitMQOperation(connection, queueName);
+                return new RabbitMQOperation(connection, iMediator, queueName);
             });
         }
 
