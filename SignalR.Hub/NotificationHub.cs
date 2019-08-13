@@ -3,11 +3,18 @@ using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EventBusRabbitMQ;
 
 namespace SignalR.Hub
 {
     public class NotificationHub : Microsoft.AspNetCore.SignalR.Hub
     {
+        private readonly IRabbitMQOperation mQOperation;
+
+        public NotificationHub(IRabbitMQOperation mQOperation)
+        {
+            this.mQOperation = mQOperation;
+        }
         //add configuration by bhavik yadav date:09/08/19
         public override async Task OnConnectedAsync()
         {
@@ -21,10 +28,10 @@ namespace SignalR.Hub
             await base.OnDisconnectedAsync(ex);
         }
 
-       //send message to user by bhavik yadav date:09/08/19
+        //send message to user by bhavik yadav date:09/08/19
         public async Task SendWelcomeMessage()
         {
-            await Clients.All.SendAsync("WelcomeMessage","Welcome user...");
+            await Clients.All.SendAsync("WelcomeMessage", mQOperation.RetriveMessage());
         }
     }
 

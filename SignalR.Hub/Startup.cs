@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EventBusRabbitMQ;
+using EventBusRabbitMQ.Events;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,8 @@ namespace SignalR.Hub
 
             //send message to user by bhavik yadav date:10/08/19
             services.AddCors();
+
+            services.AddMediatR(typeof(NotificationEvent).Assembly);
 
             //inject rabbitmq class -Sahil 12-08-2019
             AddRabbitMQConfigs(services);
