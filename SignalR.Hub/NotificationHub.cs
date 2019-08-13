@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EventBusRabbitMQ;
+using SignalR.Hub.Logging;
 
 namespace SignalR.Hub
 {
@@ -31,7 +32,10 @@ namespace SignalR.Hub
         //send message to user by bhavik yadav date:09/08/19
         public async Task SendWelcomeMessage()
         {
+            NLogger.WriteLogIntoFile("SendWelcomeMessage", "", "welcome message called.");
             await Clients.All.SendAsync("WelcomeMessage", mQOperation.RetriveMessage());
+            NLogger.WriteLogIntoFile("SendWelcomeMessage", "", "welcome message called, RetiveMessage:"+ mQOperation.RetriveMessage());
+
         }
     }
 

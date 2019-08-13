@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
+using SignalR.Hub.Logging;
 
 namespace SignalR.Hub
 {
@@ -37,6 +38,9 @@ namespace SignalR.Hub
             services.AddCors();
 
             services.AddMediatR(typeof(NotificationEvent).Assembly);
+
+            //add NLogger class DI -Sahil 13-08-2019
+            services.AddSingleton<INLogger, NLogger>();
 
             //inject rabbitmq class -Sahil 12-08-2019
             AddRabbitMQConfigs(services);
@@ -71,6 +75,7 @@ namespace SignalR.Hub
                 var connection = sp.GetRequiredService<IRabbitMQPersistentConnection>();
                 var queueName = Configuration["GlobalQueue"];
                 var iMediator = sp.GetRequiredService<IMediator>();
+                //var nLogger = sp.GetRequiredService<INLogger>();
 
                 return new RabbitMQOperation(connection, iMediator, queueName);
             });
