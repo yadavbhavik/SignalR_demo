@@ -4,3 +4,105 @@ LogData: welcome message called.
 2019-08-13 17:35:27.7961|INFO|SignalR.Hub.Logging.NLogger|DateTime:13-08-2019 12:05:27##MethodName:SendWelcomeMessage##Controllername: 
 LogData: welcome message called, RetiveMessage:
 ===================================================================================================================
+2019-08-13 18:03:19.2866|INFO|SignalR.Hub.Logging.NLogger|DateTime:13-08-2019 12:33:19##MethodName:SendWelcomeMessage##Controllername: 
+LogData: welcome message called.
+===================================================================================================================
+2019-08-13 18:03:20.0341|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:33:20##MethodName:RetriveMessage##Controllername: 
+LogData: Outside consumer.Received 
+===================================================================================================================
+2019-08-13 18:03:20.1867|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:33:20##MethodName:RetriveMessage##Controllername: 
+LogData: After channel.BasicConsume message: 
+===================================================================================================================
+2019-08-13 18:03:20.2033|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:33:20##MethodName:RetriveMessage##Controllername: 
+LogData: Outside consumer.Received 
+===================================================================================================================
+2019-08-13 18:03:20.2033|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:33:20##MethodName:RetriveMessage##Controllername: 
+LogData: After channel.BasicConsume message: 
+===================================================================================================================
+2019-08-13 18:03:20.2033|INFO|SignalR.Hub.Logging.NLogger|DateTime:13-08-2019 12:33:20##MethodName:SendWelcomeMessage##Controllername: 
+LogData: welcome message called, RetiveMessage:
+===================================================================================================================
+2019-08-13 18:03:47.8870|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:33:47##MethodName:RetriveMessage##Controllername: 
+LogData: Inside consumer.Received body: System.Byte[]
+===================================================================================================================
+2019-08-13 18:03:47.8870|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:33:47##MethodName:RetriveMessage##Controllername: 
+LogData: Inside consumer.Received message: sahil
+===================================================================================================================
+2019-08-13 18:03:59.1974|INFO|SignalR.Hub.Logging.NLogger|DateTime:13-08-2019 12:33:59##MethodName:SendWelcomeMessage##Controllername: 
+LogData: welcome message called.
+===================================================================================================================
+2019-08-13 18:03:59.1974|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:33:59##MethodName:RetriveMessage##Controllername: 
+LogData: Outside consumer.Received 
+===================================================================================================================
+2019-08-13 18:03:59.1974|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:33:59##MethodName:RetriveMessage##Controllername: 
+LogData: After channel.BasicConsume message: 
+===================================================================================================================
+2019-08-13 18:03:59.1974|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:33:59##MethodName:RetriveMessage##Controllername: 
+LogData: Outside consumer.Received 
+===================================================================================================================
+2019-08-13 18:03:59.2351|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:33:59##MethodName:RetriveMessage##Controllername: 
+LogData: After channel.BasicConsume message: 
+===================================================================================================================
+2019-08-13 18:03:59.2351|INFO|SignalR.Hub.Logging.NLogger|DateTime:13-08-2019 12:33:59##MethodName:SendWelcomeMessage##Controllername: 
+LogData: welcome message called, RetiveMessage:
+===================================================================================================================
+2019-08-13 18:05:11.1559|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:35:11##MethodName:RetriveMessage##Controllername: 
+LogData: Inside consumer.Received body: System.Byte[]
+===================================================================================================================
+2019-08-13 18:05:11.1559|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:35:11##MethodName:RetriveMessage##Controllername: 
+LogData: Inside consumer.Received message: bhavik
+===================================================================================================================
+2019-08-13 18:08:09.0411|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:38:09##MethodName:RetriveMessage##Controllername: 
+LogData: Inside consumer.Received body: System.Byte[]
+===================================================================================================================
+2019-08-13 18:08:09.0411|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:38:09##MethodName:RetriveMessage##Controllername: 
+LogData: Inside consumer.Received message: bhavik yadav
+===================================================================================================================
+2019-08-13 18:08:21.1459|INFO|SignalR.Hub.Logging.NLogger|DateTime:13-08-2019 12:38:21##MethodName:SendWelcomeMessage##Controllername: 
+LogData: welcome message called.
+===================================================================================================================
+2019-08-13 18:08:21.1502|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:38:21##MethodName:RetriveMessage##Controllername: 
+LogData: Outside consumer.Received 
+===================================================================================================================
+2019-08-13 18:08:21.2314|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:38:21##MethodName:RetriveMessage##Controllername: 
+LogData: After channel.BasicConsume message: 
+===================================================================================================================
+2019-08-13 18:08:21.2314|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:38:21##MethodName:RetriveMessage##Controllername: 
+LogData: Outside consumer.Received 
+===================================================================================================================
+2019-08-13 18:08:21.2314|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:38:21##MethodName:RetriveMessage##Controllername: 
+LogData: After channel.BasicConsume message: 
+===================================================================================================================
+2019-08-13 18:08:21.2314|INFO|SignalR.Hub.Logging.NLogger|DateTime:13-08-2019 12:38:21##MethodName:SendWelcomeMessage##Controllername: 
+LogData: welcome message called, RetiveMessage:
+===================================================================================================================
+2019-08-13 18:09:38.7283|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:39:38##MethodName:RetriveMessage##Controllername: 
+LogData: Inside consumer.Received body: System.Byte[]
+===================================================================================================================
+2019-08-13 18:09:38.7283|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:39:38##MethodName:RetriveMessage##Controllername: 
+LogData: Inside consumer.Received message: sahil purvadharna
+===================================================================================================================
+2019-08-13 18:10:12.4415|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:40:12##MethodName:RetriveMessage##Controllername: 
+LogData: Inside consumer.Received body: System.Byte[]
+===================================================================================================================
+2019-08-13 18:10:12.4744|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:40:12##MethodName:RetriveMessage##Controllername: 
+LogData: Inside consumer.Received message: sahil purvadharna 2
+===================================================================================================================
+2019-08-13 18:10:33.8572|INFO|SignalR.Hub.Logging.NLogger|DateTime:13-08-2019 12:40:33##MethodName:SendWelcomeMessage##Controllername: 
+LogData: welcome message called.
+===================================================================================================================
+2019-08-13 18:10:33.8807|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:40:33##MethodName:RetriveMessage##Controllername: 
+LogData: Outside consumer.Received 
+===================================================================================================================
+2019-08-13 18:10:35.6265|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:40:35##MethodName:RetriveMessage##Controllername: 
+LogData: After channel.BasicConsume message: 
+===================================================================================================================
+2019-08-13 18:10:35.6731|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:40:35##MethodName:RetriveMessage##Controllername: 
+LogData: Outside consumer.Received 
+===================================================================================================================
+2019-08-13 18:10:35.7093|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:13-08-2019 12:40:35##MethodName:RetriveMessage##Controllername: 
+LogData: After channel.BasicConsume message: 
+===================================================================================================================
+2019-08-13 18:10:35.7480|INFO|SignalR.Hub.Logging.NLogger|DateTime:13-08-2019 12:40:35##MethodName:SendWelcomeMessage##Controllername: 
+LogData: welcome message called, RetiveMessage:
+===================================================================================================================

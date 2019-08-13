@@ -1,4 +1,5 @@
 ﻿using EventBusRabbitMQ.Events;
+using EventBusRabbitMQ.Logging;
 using MediatR;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -14,9 +15,10 @@ namespace EventBusRabbitMQ
         private readonly string queueName;
         private readonly IMediator mediator;
         private IModel consumerChannel;
+        private string message;
 
 
-        public RabbitMQOperation(IRabbitMQPersistentConnection persistentConnection, IMediator mediator,string queueName = null)
+        public RabbitMQOperation(IRabbitMQPersistentConnection persistentConnection, IMediator mediator, string queueName = null)
         {
             this.persistentConnection = persistentConnection;
             this.queueName = queueName;
@@ -43,7 +45,7 @@ namespace EventBusRabbitMQ
         public string RetriveMessage()
         {
             var channel = consumerChannel;
-            var message = "";
+            //var message = "";
             channel.ExchangeDeclare(exchange: "client-update", type: "direct", true);
 
             // var queueName = channel.QueueDeclare().QueueName;
@@ -52,20 +54,33 @@ namespace EventBusRabbitMQ
                               routingKey: "notification");
 
             var consumer = new EventingBasicConsumer(channel);
-            
-            consumer.Received += async(model, ea) =>
+            try
             {
-                var body = ea.Body;
-                message = Encoding.UTF8.GetString(body);
-                //  Console.WriteLine(" [x] {0}", message);
+                NLogger.WriteLogIntoFile("RetriveMessage", "", "Outside consumer.Received ");
+                consumer.Received += async (model, ea) =>
+                {
+                    var body = ea.Body;
+                    NLogger.WriteLogIntoFile("RetriveMessage", "", "Inside consumer.Received body: "+ body.ToString());
 
-                //send event command to notification hub through mediatR -Sahil 12-08-2019
-                await mediator.Publish(new NotificationEvent { Message = message });
-                Console.WriteLine("Class: RetriveMessage, Messaage: " + message);
-            };
+                    message += Encoding.UTF8.GetString(body);
+                    NLogger.WriteLogIntoFile("RetriveMessage", "", "Inside consumer.Received message: "+ message);
+
+                    //  Console.WriteLine(" [x] {0}", message);
+
+                    //send event command to notification hub through mediatR -Sahil 12-08-2019
+                    //await mediator.Publish(new NotificationEvent { Message = message });
+                    
+                };
+            }
+            catch (Exception e)
+            {
+                NLogger.WriteErrorLog(System.Reflection.MethodBase.GetCurrentMethod().Name, "", e);
+            }
+
             channel.BasicConsume(queue: queueName,
                                  autoAck: true,
                                  consumer: consumer);
+            NLogger.WriteLogIntoFile(System.Reflection.MethodBase.GetCurrentMethod().Name, "", "After channel.BasicConsume message: " + message);
             return message;
         }
 

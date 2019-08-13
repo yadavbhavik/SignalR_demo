@@ -40,7 +40,7 @@ namespace SignalR.Hub
             services.AddMediatR(typeof(NotificationEvent).Assembly);
 
             //add NLogger class DI -Sahil 13-08-2019
-            services.AddSingleton<INLogger, NLogger>();
+            //services.AddSingleton<INLogger, NLogger>();
 
             //inject rabbitmq class -Sahil 12-08-2019
             AddRabbitMQConfigs(services);
