@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EventBusRabbitMQ;
-using SignalR.Hub.Logging;
+using EventBusRabbitMQ.Logging;
 
 namespace SignalR.Hub
 {

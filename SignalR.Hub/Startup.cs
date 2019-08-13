@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
-using SignalR.Hub.Logging;
 
 namespace SignalR.Hub
 {
