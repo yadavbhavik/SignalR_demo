@@ -97,49 +97,49 @@ namespace EventBusRabbitMQ
             throw new NotImplementedException();
         }
 
-        // add retriveMessage method by bhavik yadav date:12/08/19
-        public string RetriveMessage()
-        {
-            var channel = consumerChannel;
-            //var message = "";
+        //// add retriveMessage method by bhavik yadav date:12/08/19
+        //public string RetriveMessage()
+        //{
+        //    var channel = consumerChannel;
+        //    //var message = "";
 
-            channel.ExchangeDeclare(exchange: "client-update", type: "direct", true);
+        //    channel.ExchangeDeclare(exchange: "client-update", type: "direct", true);
 
-            // var queueName = channel.QueueDeclare().QueueName;
-            channel.QueueBind(queue: queueName,
-                              exchange: "client-update",
-                              routingKey: "notification");
+        //    // var queueName = channel.QueueDeclare().QueueName;
+        //    channel.QueueBind(queue: queueName,
+        //                      exchange: "client-update",
+        //                      routingKey: "notification");
 
-            var consumer = new EventingBasicConsumer(channel);
-            try
-            {
-                NLogger.WriteLogIntoFile("RetriveMessage", "", "Outside consumer.Received ");
-                consumer.Received += async (model, ea) =>
-                {
-                    var body = ea.Body;
-                    NLogger.WriteLogIntoFile("RetriveMessage", "", "Inside consumer.Received body: " + body.ToString());
+        //    var consumer = new EventingBasicConsumer(channel);
+        //    try
+        //    {
+        //        NLogger.WriteLogIntoFile("RetriveMessage", "", "Outside consumer.Received ");
+        //        consumer.Received += async (model, ea) =>
+        //        {
+        //            var body = ea.Body;
+        //            NLogger.WriteLogIntoFile("RetriveMessage", "", "Inside consumer.Received body: " + body.ToString());
 
-                    message += Encoding.UTF8.GetString(body);
-                    NLogger.WriteLogIntoFile("RetriveMessage", "", "Inside consumer.Received message: " + message);
+        //            message += Encoding.UTF8.GetString(body);
+        //            NLogger.WriteLogIntoFile("RetriveMessage", "", "Inside consumer.Received message: " + message);
 
-                    //  Console.WriteLine(" [x] {0}", message);
+        //            //  Console.WriteLine(" [x] {0}", message);
 
-                    //send event command to notification hub through mediatR -Sahil 12-08-2019
-                    //await mediator.Publish(new NotificationEvent { Message = message });
+        //            //send event command to notification hub through mediatR -Sahil 12-08-2019
+        //            //await mediator.Publish(new NotificationEvent { Message = message });
 
-                };
-            }
-            catch (Exception e)
-            {
-                NLogger.WriteErrorLog(System.Reflection.MethodBase.GetCurrentMethod().Name, "", e);
-            }
+        //        };
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        NLogger.WriteErrorLog(System.Reflection.MethodBase.GetCurrentMethod().Name, "", e);
+        //    }
 
-            channel.BasicConsume(queue: queueName,
-                                 autoAck: true,
-                                 consumer: consumer);
-            NLogger.WriteLogIntoFile(System.Reflection.MethodBase.GetCurrentMethod().Name, "", "After channel.BasicConsume message: " + message);
-            return message;
-        }
+        //    channel.BasicConsume(queue: queueName,
+        //                         autoAck: true,
+        //                         consumer: consumer);
+        //    NLogger.WriteLogIntoFile(System.Reflection.MethodBase.GetCurrentMethod().Name, "", "After channel.BasicConsume message: " + message);
+        //    return message;
+        //}
 
         public void Subscribe<T, TH>()
             where T : IntegrationEvent
