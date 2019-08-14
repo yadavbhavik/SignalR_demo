@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EventBusRabbitMQ;
 using EventBusRabbitMQ.Events;
+using EventBusRabbitMQ.Subscription;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,6 +44,8 @@ namespace SignalR.Hub
 
             //inject rabbitmq class -Sahil 12-08-2019
             AddRabbitMQConfigs(services);
+
+            services.AddSingleton<ISubscriptionsManager, InMemorySubscriptionsManager>();
         }
 
         private void AddRabbitMQConfigs(IServiceCollection services)
@@ -75,8 +78,9 @@ namespace SignalR.Hub
                 var queueName = Configuration["GlobalQueue"];
                 var iMediator = sp.GetRequiredService<IMediator>();
                 //var nLogger = sp.GetRequiredService<INLogger>();
+                var subManager = sp.GetRequiredService<ISubscriptionsManager>();
 
-                return new RabbitMQOperation(connection, iMediator, queueName);
+                return new RabbitMQOperation(connection, iMediator, subManager,queueName);
             });
         }
 
