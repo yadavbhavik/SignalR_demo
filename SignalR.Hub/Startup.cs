@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using EventBusRabbitMQ;
 using EventBusRabbitMQ.Events;
 using EventBusRabbitMQ.Subscription;
@@ -12,6 +14,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
+using SignalR.Hub.AutoFacModules;
+using SignalR.Hub.Events;
 
 namespace SignalR.Hub
 {
@@ -27,7 +31,7 @@ namespace SignalR.Hub
             Configuration = configuration;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddSignalR(o =>
             {
@@ -37,7 +41,7 @@ namespace SignalR.Hub
             //send message to user by bhavik yadav date:10/08/19
             services.AddCors();
 
-            services.AddMediatR(typeof(NotificationEvent).Assembly);
+            //services.AddMediatR(typeof(NotificationEvent).Assembly);
 
             //add NLogger class DI -Sahil 13-08-2019
             //services.AddSingleton<INLogger, NLogger>();
@@ -46,6 +50,13 @@ namespace SignalR.Hub
             AddRabbitMQConfigs(services);
 
             services.AddSingleton<ISubscriptionsManager, InMemorySubscriptionsManager>();
+
+            //configure autofac
+            var container = new ContainerBuilder();
+            container.RegisterModule(new ApplicationModule());
+            container.Populate(services);
+
+            return new AutofacServiceProvider(container.Build());
         }
 
         private void AddRabbitMQConfigs(IServiceCollection services)
@@ -76,11 +87,12 @@ namespace SignalR.Hub
             {
                 var connection = sp.GetRequiredService<IRabbitMQPersistentConnection>();
                 var queueName = Configuration["GlobalQueue"];
-                var iMediator = sp.GetRequiredService<IMediator>();
+                //var iMediator = sp.GetRequiredService<IMediator>();
                 //var nLogger = sp.GetRequiredService<INLogger>();
                 var subManager = sp.GetRequiredService<ISubscriptionsManager>();
+                var iLifeTimeScope = sp.GetRequiredService<ILifetimeScope>();
 
-                return new RabbitMQOperation(connection, iMediator, subManager,queueName);
+                return new RabbitMQOperation(connection, subManager, iLifeTimeScope, queueName);
             });
         }
 
@@ -105,11 +117,18 @@ namespace SignalR.Hub
                 routes.MapHub<NotificationHub>("/notificationhub");
             });
 
+            ConfigureEventBus(app);
 
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World!");
             });
+        }
+
+        private void ConfigureEventBus(IApplicationBuilder app)
+        {
+            var eventBus = app.ApplicationServices.GetRequiredService<IRabbitMQOperation>();
+            eventBus.Subscribe<StockPriceChangedEvent, StockPriceChangedEventHandler>();
         }
     }
 }

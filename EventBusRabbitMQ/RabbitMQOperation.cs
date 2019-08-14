@@ -1,12 +1,15 @@
-﻿using EventBusRabbitMQ.Events;
+﻿using Autofac;
+using EventBusRabbitMQ.Events;
 using EventBusRabbitMQ.Logging;
 using EventBusRabbitMQ.Subscription;
 using MediatR;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace EventBusRabbitMQ
 {
@@ -16,18 +19,20 @@ namespace EventBusRabbitMQ
         private readonly string queueName;
         private readonly IMediator mediator;
         private readonly Subscription.ISubscriptionsManager subManager;
+        private readonly ILifetimeScope lifetimeScope;
         private readonly string EXCHANGE_NAME = "client-update";
         private readonly string ROUTING_KEY = "notification";
         private IModel consumerChannel;
         private string message;
 
 
-        public RabbitMQOperation(IRabbitMQPersistentConnection persistentConnection, IMediator mediator, ISubscriptionsManager subManager, string queueName = null)
+        public RabbitMQOperation(IRabbitMQPersistentConnection persistentConnection, ISubscriptionsManager subManager, ILifetimeScope lifetimeScope, string queueName = null)
         {
             this.persistentConnection = persistentConnection;
             this.queueName = queueName;
-            this.mediator = mediator;
+            //this.mediator = mediator;
             this.subManager = subManager;
+            this.lifetimeScope = lifetimeScope;
             this.consumerChannel = CreateConsumerChannel();
         }
 
@@ -43,7 +48,53 @@ namespace EventBusRabbitMQ
 
 
             var channel = persistentConnection.CreateModel();
+            channel.ExchangeDeclare(exchange: EXCHANGE_NAME, type: "direct", true);
+
+            channel.QueueDeclare(queue: queueName,
+                                 durable: true,
+                                 exclusive: false,
+                                 autoDelete: false,
+                                 arguments: null);
+
+            var consumer = new EventingBasicConsumer(channel);
+            consumer.Received += async (model, ea) =>
+            {
+                var eventName = ea.RoutingKey;
+                var message = Encoding.UTF8.GetString(ea.Body);
+
+                await ProcessEvent(eventName, message);
+
+                channel.BasicAck(ea.DeliveryTag, multiple: false);
+            };
+
+            channel.BasicConsume(queue: queueName,
+                                 autoAck: false,
+                                 consumer: consumer);
+
             return channel;
+        }
+
+        private async Task ProcessEvent(string eventName, string message)
+        {
+            if (subManager.HasSubscriptionsForEvent(eventName))
+            {
+                var subscriptions = subManager.GetHandlersForEvent(eventName);
+                foreach (var subscription in subscriptions)
+                {
+                    var handler = lifetimeScope.ResolveOptional(subscription.HandlerType);
+                    if (handler == null) continue;
+                    var eventType = subManager.GetEventTypeByName(eventName);
+                    var integrationEvent = JsonConvert.DeserializeObject(message, eventType);
+                    var concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);
+                    await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { integrationEvent });
+                }
+
+            }
+        }
+
+        private void await(Task task)
+        {
+            throw new NotImplementedException();
         }
 
         // add retriveMessage method by bhavik yadav date:12/08/19
@@ -51,6 +102,7 @@ namespace EventBusRabbitMQ
         {
             var channel = consumerChannel;
             //var message = "";
+
             channel.ExchangeDeclare(exchange: "client-update", type: "direct", true);
 
             // var queueName = channel.QueueDeclare().QueueName;

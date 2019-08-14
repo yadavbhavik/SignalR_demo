@@ -15,6 +15,10 @@ namespace EventBusRabbitMQ.Subscription
 
         bool HasSubscriptionsForEvent(string eventName);
 
+        IEnumerable<SubscriptionInfo> GetHandlersForEvent(string eventName);
+
+        Type GetEventTypeByName(string eventName);
+
 
     }
 }

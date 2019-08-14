@@ -9,25 +9,26 @@ namespace EventBusRabbitMQ.Subscription
     public class InMemorySubscriptionsManager : ISubscriptionsManager
     {
 
-        private readonly Dictionary<string, List<SubscriptionInfo>> _handlers;
-        private readonly List<Type> _eventTypes;
+        private readonly Dictionary<string, List<SubscriptionInfo>> handlers;
+        private readonly List<Type> eventTypes;
 
         public InMemorySubscriptionsManager()
         {
-            _handlers = new Dictionary<string, List<SubscriptionInfo>>();
-            _eventTypes = new List<Type>();
+            handlers = new Dictionary<string, List<SubscriptionInfo>>();
+            eventTypes = new List<Type>();
         }
+
         public void AddSubscription<T, TH>()
-            where T : IntegrationEvent
-            where TH : IIntegrationEventHandler<T>
+             where T : IntegrationEvent
+             where TH : IIntegrationEventHandler<T>
         {
             var eventName = GetEventKey<T>();
 
             DoAddSubscription(typeof(TH), eventName);
 
-            if (!_eventTypes.Contains(typeof(T)))
+            if (!eventTypes.Contains(typeof(T)))
             {
-                _eventTypes.Add(typeof(T));
+                eventTypes.Add(typeof(T));
             }
 
         }
@@ -36,16 +37,16 @@ namespace EventBusRabbitMQ.Subscription
         {
             if (!HasSubscriptionsForEvent(eventName))
             {
-                _handlers.Add(eventName, new List<SubscriptionInfo>());
+                handlers.Add(eventName, new List<SubscriptionInfo>());
             }
 
-            if (_handlers[eventName].Any(s => s.HandlerType == handlerType))
+            if (handlers[eventName].Any(s => s.HandlerType == handlerType))
             {
                 throw new ArgumentException(
                     $"Handler Type {handlerType.Name} already registered for '{eventName}'", nameof(handlerType));
             }
 
-            _handlers[eventName].Add(SubscriptionInfo.Typed(handlerType));
+            handlers[eventName].Add(SubscriptionInfo.Typed(handlerType));
         }
 
         public string GetEventKey<T>()
@@ -55,7 +56,12 @@ namespace EventBusRabbitMQ.Subscription
 
         public bool HasSubscriptionsForEvent(string eventName)
         {
-            return _handlers.ContainsKey(eventName);
+            return handlers.ContainsKey(eventName);
         }
+
+        public IEnumerable<SubscriptionInfo> GetHandlersForEvent(string eventName) => handlers[eventName];
+
+        public Type GetEventTypeByName(string eventName) => eventTypes.SingleOrDefault(t => t.Name == eventName);
+
     }
 }
