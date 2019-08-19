@@ -9,7 +9,7 @@ namespace EventBusRabbitMQ
     public interface IRabbitMQOperation
     {
 
-         string RetriveMessage ();
+         //string RetriveMessage ();
 
         void Subscribe<T, TH>()
             where T : IntegrationEvent

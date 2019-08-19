@@ -34,7 +34,6 @@ namespace SignalR.Hub
         {
             NLogger.WriteLogIntoFile("SendWelcomeMessage", "", "welcome message called.");
             await Clients.All.SendAsync("WelcomeMessage", "Testing...testing...welcome user.");
-            NLogger.WriteLogIntoFile("SendWelcomeMessage", "", "welcome message called, RetiveMessage:"+ mQOperation.RetriveMessage());
 
         }
     }
