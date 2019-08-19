@@ -76,6 +76,7 @@ namespace EventBusRabbitMQ
 
         private async Task ProcessEvent(string eventName, string message)
         {
+            eventName = "StockPriceChangedEvent";
             if (subManager.HasSubscriptionsForEvent(eventName))
             {
                 var subscriptions = subManager.GetHandlersForEvent(eventName);
