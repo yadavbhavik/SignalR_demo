@@ -39,7 +39,16 @@ namespace SignalR.Hub
             });
 
             //send message to user by bhavik yadav date:10/08/19
-            services.AddCors();
+            services.AddCors(
+                options =>
+                {
+                    options.AddPolicy("CorsPolicy",
+                        builder => builder
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .SetIsOriginAllowed((host) => true)
+                        .AllowCredentials());
+                });
 
             //services.AddMediatR(typeof(NotificationEvent).Assembly);
 
@@ -105,13 +114,7 @@ namespace SignalR.Hub
             }
 
             //send message to user by bhavik yadav date:10/08/19
-            app.UseCors(builder =>
-            {
-                builder.AllowAnyOrigin()
-                    .AllowAnyHeader()
-                    .WithMethods("GET", "POST", "DELETE", "PUT")
-                    .AllowCredentials();
-            });
+            app.UseCors("CorsPolicy");
             app.UseSignalR(routes =>
             {
                 routes.MapHub<NotificationHub>("/notificationhub");

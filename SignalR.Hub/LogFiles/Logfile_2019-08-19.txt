@@ -1,0 +1,30 @@
+2019-08-19 11:16:51.0173|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:19-08-2019 05:46:50##MethodName:SendWelcomeMessage##Controllername: 
+LogData: welcome message called.
+===================================================================================================================
+2019-08-19 11:16:51.0733|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:19-08-2019 05:46:51##MethodName:RetriveMessage##Controllername: 
+LogData: Outside consumer.Received 
+===================================================================================================================
+2019-08-19 11:16:51.1248|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:19-08-2019 05:46:51##MethodName:RetriveMessage##Controllername: 
+LogData: After channel.BasicConsume message: 
+===================================================================================================================
+2019-08-19 11:16:51.1248|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:19-08-2019 05:46:51##MethodName:RetriveMessage##Controllername: 
+LogData: Outside consumer.Received 
+===================================================================================================================
+2019-08-19 11:16:51.1248|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:19-08-2019 05:46:51##MethodName:RetriveMessage##Controllername: 
+LogData: After channel.BasicConsume message: 
+===================================================================================================================
+2019-08-19 11:16:51.1248|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:19-08-2019 05:46:51##MethodName:SendWelcomeMessage##Controllername: 
+LogData: welcome message called, RetiveMessage:
+===================================================================================================================
+2019-08-19 11:17:29.7550|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:19-08-2019 05:47:29##MethodName:RetriveMessage##Controllername: 
+LogData: Inside consumer.Received body: System.Byte[]
+===================================================================================================================
+2019-08-19 11:17:29.8640|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:19-08-2019 05:47:29##MethodName:RetriveMessage##Controllername: 
+LogData: Inside consumer.Received message: {"message": "price change cors 10 Rs."}
+===================================================================================================================
+2019-08-19 11:18:04.3184|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:19-08-2019 05:48:04##MethodName:RetriveMessage##Controllername: 
+LogData: Inside consumer.Received body: System.Byte[]
+===================================================================================================================
+2019-08-19 11:18:04.3184|INFO|EventBusRabbitMQ.Logging.NLogger|DateTime:19-08-2019 05:48:04##MethodName:RetriveMessage##Controllername: 
+LogData: Inside consumer.Received message: {"message": "price change cors 10 Rs."}{"message": "price change cors 10 Rs."}
+===================================================================================================================
