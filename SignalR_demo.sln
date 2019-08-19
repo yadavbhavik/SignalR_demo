@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR.Hub", "SignalR.Hub\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBusRabbitMQ", "EventBusRabbitMQ\EventBusRabbitMQ.csproj", "{DEBCEDF8-A123-4E80-B90E-1CB676323DC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.ConsoleApplication", "RabbitMQ.ConsoleApplication\RabbitMQ.ConsoleApplication.csproj", "{07C47088-0C60-47B3-8D5C-5A4CEACD2718}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ.ConsoleApplication", "RabbitMQ.ConsoleApplication\RabbitMQ.ConsoleApplication.csproj", "{07C47088-0C60-47B3-8D5C-5A4CEACD2718}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CC7526C1-ED1D-485F-AFDD-FA4C0186F248}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR_demo.UnitTests", "Tests\SignalR_demo.UnitTests\SignalR_demo.UnitTests.csproj", "{640A5281-6984-4F34-9F42-6994C8B03D5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +37,16 @@ Global
 		{07C47088-0C60-47B3-8D5C-5A4CEACD2718}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07C47088-0C60-47B3-8D5C-5A4CEACD2718}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07C47088-0C60-47B3-8D5C-5A4CEACD2718}.Release|Any CPU.Build.0 = Release|Any CPU
+		{640A5281-6984-4F34-9F42-6994C8B03D5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{640A5281-6984-4F34-9F42-6994C8B03D5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{640A5281-6984-4F34-9F42-6994C8B03D5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{640A5281-6984-4F34-9F42-6994C8B03D5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{640A5281-6984-4F34-9F42-6994C8B03D5B} = {CC7526C1-ED1D-485F-AFDD-FA4C0186F248}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FAFE10FA-128C-497B-936F-695F9EF93EEE}
