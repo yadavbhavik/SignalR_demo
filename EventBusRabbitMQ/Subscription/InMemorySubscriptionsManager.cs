@@ -63,5 +63,9 @@ namespace EventBusRabbitMQ.Subscription
 
         public Type GetEventTypeByName(string eventName) => eventTypes.SingleOrDefault(t => t.Name == eventName);
 
+        //Add public wrapper methods or testing private members -Sahil 19-08-2019
+        public int EventTypeCountTest() => eventTypes.Count();
+        public void DoAddSubscriptionTest(Type handlerName, string eventName) => DoAddSubscription(handlerName, eventName);
+
     }
 }
