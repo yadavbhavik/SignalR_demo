@@ -39,6 +39,7 @@ namespace SignalR.Hub
             });
 
             //send message to user by bhavik yadav date:10/08/19
+            //change cors policy for allow all connection from user -Sahil 19-08-2019
             services.AddCors(
                 options =>
                 {
@@ -114,6 +115,7 @@ namespace SignalR.Hub
             }
 
             //send message to user by bhavik yadav date:10/08/19
+            //use cors alllow all connection cors policy defined in ConfigureServices -Sahil 19-08-2019
             app.UseCors("CorsPolicy");
             app.UseSignalR(routes =>
             {

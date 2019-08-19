@@ -33,7 +33,7 @@ namespace SignalR.Hub
         public async Task SendWelcomeMessage()
         {
             NLogger.WriteLogIntoFile("SendWelcomeMessage", "", "welcome message called.");
-            await Clients.All.SendAsync("WelcomeMessage", mQOperation.RetriveMessage());
+            await Clients.All.SendAsync("WelcomeMessage", "Testing...testing...welcome user.");
             NLogger.WriteLogIntoFile("SendWelcomeMessage", "", "welcome message called, RetiveMessage:"+ mQOperation.RetriveMessage());
 
         }
