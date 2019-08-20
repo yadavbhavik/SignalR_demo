@@ -10,11 +10,8 @@ namespace SignalR.Hub
 {
     public class NotificationHub : Microsoft.AspNetCore.SignalR.Hub
     {
-        private readonly IRabbitMQOperation mQOperation;
-
-        public NotificationHub(IRabbitMQOperation mQOperation)
+        public NotificationHub()
         {
-            this.mQOperation = mQOperation;
         }
         //add configuration by bhavik yadav date:09/08/19
         public override async Task OnConnectedAsync()
