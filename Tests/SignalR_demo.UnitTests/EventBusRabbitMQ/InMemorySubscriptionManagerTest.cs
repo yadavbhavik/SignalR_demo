@@ -37,17 +37,15 @@ namespace SignalR_demo.UnitTests.EventBusRabbitMQ
             Assert.NotNull(returnKey);
         }
 
-        [Fact(Skip ="DoSubscription method testing has not done yet")]
+        [Fact]
         public void AddSubscription_Not_Add_EventTypes_If_Exists()
         {
             //Arrange
-
-            //add event already into eventType list
-            inMemorySubscriptionsManager.AddSubscription<StockPriceChangedEvent, StockPriceChangedEventHandler>();
+            //add event into eventType list
+            inMemorySubscriptionsManager.AddEventTypesForTest<StockPriceChangedEvent>();
             var preEventTypeCount = inMemorySubscriptionsManager.EventTypeCountTest();
 
             //Act
-
             //again add same event for check if contains validation is working or not
             inMemorySubscriptionsManager.AddSubscription<StockPriceChangedEvent, StockPriceChangedEventHandler>();
             var eventTypeCount = inMemorySubscriptionsManager.EventTypeCountTest();
