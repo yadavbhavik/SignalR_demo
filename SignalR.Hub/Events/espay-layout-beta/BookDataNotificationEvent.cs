@@ -8,6 +8,11 @@ namespace SignalR.Hub.Events.espay_layout_beta
 {
     public class BookDataNotificationEvent: IntegrationEvent
     {
+        /*example of members -Sahil 21-08-2019
+         * Type e.x BuyerBookLP
+         * Pair e.x like as DefaultPair or DefaultBaseCurrency from appsettings
+         * Data e.x OrderBook data
+         */
         public string Type { get; }
         public string Pair { get; }
         public string Data { get; }

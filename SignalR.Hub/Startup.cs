@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
 using SignalR.Hub.AutoFacModules;
 using SignalR.Hub.Events;
+using SignalR.Hub.Events.espay_layout_beta;
 
 namespace SignalR.Hub
 {
@@ -134,6 +135,7 @@ namespace SignalR.Hub
         {
             var eventBus = app.ApplicationServices.GetRequiredService<IRabbitMQOperation>();
             eventBus.Subscribe<StockPriceChangedEvent, StockPriceChangedEventHandler>();
+            eventBus.Subscribe<BookDataNotificationEvent, BookDataEventNotificationHandler>();
         }
     }
 }
