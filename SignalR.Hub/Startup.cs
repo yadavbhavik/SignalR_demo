@@ -60,6 +60,7 @@ namespace SignalR.Hub
             AddRabbitMQConfigs(services);
 
             services.AddSingleton<ISubscriptionsManager, InMemorySubscriptionsManager>();
+            services.AddSingleton<INotificationHub, NotificationHub>();
 
             //configure autofac
             var container = new ContainerBuilder();
@@ -134,6 +135,8 @@ namespace SignalR.Hub
         {
             var eventBus = app.ApplicationServices.GetRequiredService<IRabbitMQOperation>();
             eventBus.Subscribe<StockPriceChangedEvent, StockPriceChangedEventHandler>();
+            eventBus.Subscribe<TickerDataChangeIntegrationEvent, TickerDataChangeIntegrationEventHandler>();
+            eventBus.Subscribe<OrderbookDataChangeIntegrationEvent, OrderbookDataChangeIntegrationEventHandler>();
         }
     }
 }

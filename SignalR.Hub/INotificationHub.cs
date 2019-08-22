@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.Hub
 {
-    interface INotificationHub
+    public interface INotificationHub
     {
         /*espay-layout-beta send constant data for specific time duration -Sahil 22-08-2019
             Params: tickerDataChangeIntegrationEvent = data to be send e.x price change

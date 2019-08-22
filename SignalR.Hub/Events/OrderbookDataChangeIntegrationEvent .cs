@@ -1,11 +1,12 @@
-﻿using System;
+﻿using EventBusRabbitMQ.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SignalR.Hub.Events
 {
-    public class OrderbookDataChangeIntegrationEvent
+    public class OrderbookDataChangeIntegrationEvent: IntegrationEvent
     {
         public string _LpName { get; set; }
         public string _PairName { get; set; }
