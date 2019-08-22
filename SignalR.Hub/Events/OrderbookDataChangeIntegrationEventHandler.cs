@@ -17,7 +17,7 @@ namespace SignalR.Hub.Events
 
         public Task Handle(OrderbookDataChangeIntegrationEvent @event)
         {
-            //TODO: redis cache retrive logic akash
+            //TODO: redis cache retrive data and send to the signalR
             //SignalR hub method call template
             string Data = null; // data are retrieved from redis
             if (@event._LpName.Equals("BuyerBookLP"))

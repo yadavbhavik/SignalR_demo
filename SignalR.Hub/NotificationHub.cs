@@ -54,18 +54,22 @@ namespace SignalR.Hub
 
         }
 
+
         public Task<int> SellerBookLP(string Type, string Pair, string Data)
         {
+            //TODO: send data to the signalR by Type and Pair wise
             throw new NotImplementedException();
         }
 
         public Task<int> BuyerBookLP(string Type, string Pair, string Data)
         {
+            //TODO: send data to the signalR by Type and Pair wise
             throw new NotImplementedException();
         }
 
-        public Task<int> TickerData(TickerDataChangeIntegrationEvent tickerDataChangeIntegrationEvent)
+        public Task<int> TickerData(TickerDataChangeIntegrationEvent @event)
         {
+            //TODO: send data to the signalR by Type and Pair wise from @event_LpType and _PairData parameter
             throw new NotImplementedException();
         }
     }
