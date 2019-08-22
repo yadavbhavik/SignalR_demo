@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using EventBusRabbitMQ;
 using EventBusRabbitMQ.Logging;
 using Microsoft.Extensions.Configuration;
+using SignalR.Hub.Events;
 
 namespace SignalR.Hub
 {
-    public class NotificationHub : Microsoft.AspNetCore.SignalR.Hub
+    public class NotificationHub : Microsoft.AspNetCore.SignalR.Hub, INotificationHub
     {
         private readonly IConfiguration configuration;
 
@@ -17,6 +18,7 @@ namespace SignalR.Hub
         {
             this.configuration = configuration;
         }
+
         //add configuration by bhavik yadav date:09/08/19
         public override async Task OnConnectedAsync()
         {
@@ -50,6 +52,21 @@ namespace SignalR.Hub
             NLogger.WriteLogIntoFile("SendWelcomeMessage", "", "welcome message called.");
             await Clients.All.SendAsync("WelcomeMessage", "Testing...testing...welcome user.");
 
+        }
+
+        public Task<int> SellerBookLP(string Type, string Pair, string Data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> BuyerBookLP(string Type, string Pair, string Data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> TickerData(TickerDataChangeIntegrationEvent tickerDataChangeIntegrationEvent)
+        {
+            throw new NotImplementedException();
         }
     }
 
