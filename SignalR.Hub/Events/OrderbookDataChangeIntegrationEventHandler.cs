@@ -20,13 +20,13 @@ namespace SignalR.Hub.Events
             //TODO: redis cache retrive data and send to the signalR
             //SignalR hub method call template
             string Data = null; // data are retrieved from redis
-            if (@event._LpName.Equals("BuyerBookLP"))
+            if (@event._OrderType.Equals("BUY"))
             {
                 notificationHub.BuyerBookLP(@event._LpName, @event._PairName, Data);
                 return Task.FromResult(0);
             }
 
-            if (@event._LpName.Equals("SellerBookLP"))
+            if (@event._OrderType.Equals("SELL"))
             {
                 notificationHub.SellerBookLP(@event._LpName, @event._PairName, Data);
                 return Task.FromResult(0);

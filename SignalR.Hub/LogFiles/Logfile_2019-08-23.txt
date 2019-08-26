@@ -1,0 +1,14 @@
+2019-08-23 11:04:15.1456|INFO|SignalR.Hub.Startup|RabbitMQ Client is trying to connect
+2019-08-23 11:06:39.3073|WARN|SignalR.Hub.Startup|RabbitMQ Client acquired a persistent connection to '{HostName}' and is subscribed to failure eventslocalhost
+2019-08-23 11:13:45.1906|INFO|SignalR.Hub.Startup|A RabbitMQ connection is on shutdown. Trying to re-connect...
+2019-08-23 11:13:45.1976|INFO|SignalR.Hub.Startup|RabbitMQ Client is trying to connect
+2019-08-23 11:13:55.5780|WARN|SignalR.Hub.Startup|RabbitMQ Client acquired a persistent connection to '{HostName}' and is subscribed to failure eventslocalhost
+2019-08-23 11:28:40.5066|INFO|SignalR.Hub.Startup|RabbitMQ Client is trying to connect
+2019-08-23 11:28:48.6797|WARN|SignalR.Hub.Startup|RabbitMQ Client acquired a persistent connection to '{HostName}' and is subscribed to failure eventslocalhost
+2019-08-23 11:29:52.4699|INFO|SignalR.Hub.Startup|Subscribing to event "TickerDataChangeIntegrationEvent" with "TickerDataChangeIntegrationEventHandler"
+2019-08-23 11:33:54.6062|INFO|SignalR.Hub.Startup|A RabbitMQ connection is on shutdown. Trying to re-connect...
+2019-08-23 11:34:04.0514|INFO|SignalR.Hub.Startup|RabbitMQ Client is trying to connect
+2019-08-23 11:34:09.3047|INFO|SignalR.Hub.Startup|RabbitMQ Client is trying to connect
+2019-08-23 11:34:09.3260|WARN|SignalR.Hub.Startup|RabbitMQ Client acquired a persistent connection to '{HostName}' and is subscribed to failure eventslocalhost
+2019-08-23 11:34:09.3491|WARN|SignalR.Hub.Startup|RabbitMQ Client acquired a persistent connection to '{HostName}' and is subscribed to failure eventslocalhost
+2019-08-23 11:34:09.3659|INFO|SignalR.Hub.Startup|Subscribing to event "OrderbookDataChangeIntegrationEvent" with "OrderbookDataChangeIntegrationEventHandler"

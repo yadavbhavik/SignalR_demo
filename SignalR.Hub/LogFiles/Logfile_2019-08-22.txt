@@ -1,0 +1,4 @@
+2019-08-22 18:16:17.2523|INFO|SignalR.Hub.Startup|RabbitMQ Client is trying to connect
+2019-08-22 18:16:20.6228|WARN|SignalR.Hub.Startup|RabbitMQ Client acquired a persistent connection to '{HostName}' and is subscribed to failure eventslocalhost
+2019-08-22 18:16:24.3078|INFO|SignalR.Hub.Startup|Subscribing to event "TickerDataChangeIntegrationEvent" with "TickerDataChangeIntegrationEventHandler"
+2019-08-22 18:16:24.9984|INFO|SignalR.Hub.Startup|Subscribing to event "OrderbookDataChangeIntegrationEvent" with "OrderbookDataChangeIntegrationEventHandler"

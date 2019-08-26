@@ -1,0 +1,5 @@
+2019-08-23 11:06:39.3073|WARN|SignalR.Hub.Startup|RabbitMQ Client acquired a persistent connection to '{HostName}' and is subscribed to failure eventslocalhost
+2019-08-23 11:13:55.5780|WARN|SignalR.Hub.Startup|RabbitMQ Client acquired a persistent connection to '{HostName}' and is subscribed to failure eventslocalhost
+2019-08-23 11:28:48.6797|WARN|SignalR.Hub.Startup|RabbitMQ Client acquired a persistent connection to '{HostName}' and is subscribed to failure eventslocalhost
+2019-08-23 11:34:09.3260|WARN|SignalR.Hub.Startup|RabbitMQ Client acquired a persistent connection to '{HostName}' and is subscribed to failure eventslocalhost
+2019-08-23 11:34:09.3491|WARN|SignalR.Hub.Startup|RabbitMQ Client acquired a persistent connection to '{HostName}' and is subscribed to failure eventslocalhost

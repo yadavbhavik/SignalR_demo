@@ -1,0 +1,1 @@
+2019-08-22 18:16:20.6228|WARN|SignalR.Hub.Startup|RabbitMQ Client acquired a persistent connection to '{HostName}' and is subscribed to failure eventslocalhost
