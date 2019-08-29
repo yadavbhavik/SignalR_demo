@@ -7,7 +7,7 @@
 <h2>TransactionDetail</h2>
 <h3 id="message">Ready to connect...</h3>
 <button class="btn btn-default" id="welcomeButton">Get Welcome</button>
-<br /><br/>
+<br /><br />
 <h4>Price notification..</h4>
 <ul id="priceState">
     <li>initialize..no notification</li>
@@ -31,9 +31,16 @@
         // call when signalr connaction established -Sahil 09-08-2019
         connection.start().then(function () {
             messageComponant.innerHTML = "Connection done.. waiting for welcome message..";
+
+            //add subscription test
+            connection.invoke("AddPairSubscription", "ETH_BTC", "LTC_BTC").catch(function (err) {
+                return console.error(err.toString());
+            });
         }).catch(function (err) {
             return console.error(err.toString());
         });
+
+        
 
         // call when signalr hub send message through WelcomeMessage params -Sahil 09-08-2019
         connection.on("WelcomeMessage", function (message) {
@@ -42,7 +49,7 @@
 
 
         // call when pricestate updated call -Sahil 09-08-2019
-        connection.on("UpdatedOrderState", function (message) {
+        connection.on("ReceiveBulkSellerBook", function (message) {
             console.log("message: " + message);
             var node = document.createElement("LI");
             var textnode = document.createTextNode(message);
@@ -65,6 +72,41 @@
             event.preventDefault();
         });
 
+            //Test for max connection
+           @* console.log("Testing init...");
+            var TEST_MAX_CONNECTION = 6000;
+            var ConnectionCount = 0;
+            for (var i = 0; i < TEST_MAX_CONNECTION; i++) {
+                console.log("start iter: " + i);
+                var PreConnTime = performance.now();
+                var connection = new signalR.HubConnectionBuilder().withUrl("@settings.Value.SignalRHubUrl/notificationhub").build();
+
+                connection.start().then(function () {
+                    console.log("connection done connection count: " + (++ConnectionCount) + " Time taken: " + (PreConnTime - performance.now()));
+                }).catch(function (err) {
+                    return console.error("on iter: "+ i + " err: " + err.toString());
+                });
+            }*@
+
+        @*function TestMaxConnection(i) {
+            if (i < 0) return;
+
+            setTimeout(function () {
+                var PreConnTime = performance.now();
+                var connection = new signalR.HubConnectionBuilder().withUrl("@settings.Value.SignalRHubUrl/notificationhub").build();
+
+                connection.start().then(function () {
+                    console.log("connection done connection count: " + (++ConnectionCount) + " Time taken: " + (performance.now() - PreConnTime) + "ms");
+                }).catch(function (err) {
+                    return console.error("on iter: "+ i + " err: " + err.toString());
+                });
+
+                TestMaxConnection(--i);
+
+            }, 100);
+        }
+
+        TestMaxConnection(TEST_MAX_CONNECTION);*@
     </script>
 
 }

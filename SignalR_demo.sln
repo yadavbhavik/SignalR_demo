@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ.ConsoleApplication
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CC7526C1-ED1D-485F-AFDD-FA4C0186F248}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR_demo.UnitTests", "Tests\SignalR_demo.UnitTests\SignalR_demo.UnitTests.csproj", "{640A5281-6984-4F34-9F42-6994C8B03D5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR_demo.UnitTests", "Tests\SignalR_demo.UnitTests\SignalR_demo.UnitTests.csproj", "{640A5281-6984-4F34-9F42-6994C8B03D5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

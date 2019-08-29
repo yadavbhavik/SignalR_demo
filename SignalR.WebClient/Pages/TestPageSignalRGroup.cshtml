@@ -1,0 +1,145 @@
+﻿@page
+@model SignalR.WebClient.Pages.TestPageSignalRGroupModel
+@{
+}
+
+<br /><br />
+<select id="mainTab">
+    <option value="LP">LP</option>
+    <option value="Arbitrage">Arbitrage</option>
+</select>
+
+<select id="pairData">
+    <option value="LTC_BTC">LTC_BTC</option>
+    <option value="ETH_BTC">ETH_BTC</option>
+</select>
+<br /><br />
+
+<div id="dataDiv">
+    <h4>SellerBook</h4>
+    <ul id="dataListSell">
+        <li>initialize..no notification</li>
+    </ul>
+
+    <h4>BuyerBook</h4>
+    <ul id="dataListBuy">
+        <li>initialize..no notification</li>
+    </ul>
+
+    <h4>SellerBookArbitrage</h4>
+    <ul id="dataListSellArbi">
+        <li>initialize..no notification</li>
+    </ul>
+
+    <h4>BuyerBookArbitrage</h4>
+    <ul id="dataListBuyArbi">
+        <li>initialize..no notification</li>
+    </ul>
+</div>
+
+@using Microsoft.Extensions.Options
+@inject IOptions<AppSettings> settings
+
+@section Scripts {
+    <script type="text/javascript">
+
+    //testing signalR group wise pair subs and remove  subs
+        $(document).ready(function () {
+            var mainTabSel = "LP";
+            var pairSel = "LTC_BTC";
+
+            //signalR connection -Sahil 29-08-2019
+            var connection = new signalR.HubConnectionBuilder().withUrl("@settings.Value.SignalRHubUrl/notificationhub").build();
+
+            //signalr connection callback if success add subscription for default selection LP and LTC_BTC -Sahil 29-08-2019
+            connection.start().then(function () {
+                //add subscription test
+                connection.invoke("AddPairSubscription", "LTC_BTC").catch(function (err) {
+                    return console.error(err.toString());
+                });
+            }).catch(function (err) {
+                return console.error(err.toString());
+            });
+
+            //callback data function handle
+            connection.on("ReceiveBulkSellerBook", function (message) {
+                $("#dataListSell").empty();
+                console.log("message: " + message);
+                $("#dataListSell").append("<li>" + message + "</li>");
+            });
+
+            connection.on("ReceiveBulkBuyerBook", function (message) {
+                $("#dataListBuy").empty();
+                console.log("message: " + message);
+                $("#dataListBuy").append("<li>" + message + "</li>");
+            });
+
+            connection.on("RecieveBuyerBookArbitrage", function (message) {
+                $("#dataListBuyArbi").empty();
+                console.log("message: " + message);
+                $("#dataListBuyArbi").append("<li>" + message + "</li>");
+            });
+
+            connection.on("RecieveSellerBookArbitrage", function (message) {
+                $("#dataListSellArbi").empty();
+                console.log("message: " + message);
+                $("#dataListSellArbi").append("<li>" + message + "</li>");
+            });
+
+            //dropdown selection handle
+            $(function () {
+                $("#mainTab").change(function () {
+                    mainTabSel = $('option:selected', this).text();
+
+                    if (mainTabSel === "LP") {
+                        connection.invoke("RemoveArbitragePairSubscription", pairSel).catch(function (err) {
+                            return console.error(err.toString());
+                        });
+
+                        connection.invoke("AddPairSubscription", pairSel).catch(function (err) {
+                            return console.error(err.toString());
+                        });
+                    }
+                    else if (mainTabSel === "Arbitrage") {
+                        connection.invoke("RemovePairSubscription", pairSel).catch(function (err) {
+                            return console.error(err.toString());
+                        });
+
+                        connection.invoke("AddArbitragePairSubscription", pairSel).catch(function (err) {
+                            return console.error(err.toString());
+                        });
+                    }
+                });
+            });
+
+            $(function () {
+                $("#pairData").change(function () {
+                    if (mainTabSel === "LP") {
+                        connection.invoke("RemovePairSubscription", pairSel).catch(function (err) {
+                            return console.error(err.toString());
+                        });
+
+                        pairSel = $('option:selected', this).text();
+
+                        //add subscription test
+                        connection.invoke("AddPairSubscription", pairSel).catch(function (err) {
+                            return console.error(err.toString());
+                        });
+                    }
+                    else if (mainTabSel === "Arbitrage") {
+                        connection.invoke("RemoveArbitragePairSubscription", pairSel).catch(function (err) {
+                            return console.error(err.toString());
+                        });
+
+                        pairSel = $('option:selected', this).text();
+
+                        //add subscription test
+                        connection.invoke("AddArbitragePairSubscription", pairSel).catch(function (err) {
+                            return console.error(err.toString());
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
